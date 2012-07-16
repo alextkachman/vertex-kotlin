@@ -11,7 +11,7 @@ public class EchoClient() : Verticle() {
         vertx.createNetClient {
             connect(1234){ socket ->
                 socket.dataHandler{ buffer ->
-                    System.out.println("Net client receiving: $buffer\n-------")
+                    System.out.println("Net client receiving:\n-------\n$buffer\n-------")
                 }
 
                 //Now send some data
