@@ -184,6 +184,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VertxTest.iml" filepath="$PROJECT_DIR$/VertxTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vertx/vertx.iml" filepath="$PROJECT_DIR$/vertx/vertx.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
