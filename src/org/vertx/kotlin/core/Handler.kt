@@ -1,16 +1,16 @@
-package org.mbte.vertx
+package org.vertx.kotlin.core
 
 import org.vertx.java.core.Handler;
 
 public fun <T> handler(handlerFun: (T)->Unit) : Handler<T?>  = object: Handler<T?> {
-    public override fun handle(request: T?) {
-        handlerFun(request!!)
+    public override fun handle(arg: T?) {
+        handlerFun(arg!!)
     }
 }
 
 public fun <T> handler(handlerFun: T.()->Unit) : Handler<T?>  = object: Handler<T?> {
-    public override fun handle(request: T?) {
-        request!!.handlerFun()
+    public override fun handle(arg: T?) {
+        arg!!.handlerFun()
     }
 }
 

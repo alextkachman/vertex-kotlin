@@ -1,4 +1,4 @@
-package org.mbte.vertx
+package org.vertx.kotlin.core
 
 import org.vertx.java.core.Vertx
 
