@@ -15,9 +15,3 @@ public fun HttpServer.websocketHandler(handlerFun: (ServerWebSocket)->Unit): Htt
 
 public fun HttpServer.routeMatcher(config: RouteMatcher.()->Unit): HttpServer
         = requestHandler(RouteMatcher(config) as Handler<HttpServerRequest?>)!!
-
-fun Vertx?.createHttpServer(config: HttpServer.()->Unit) : HttpServer {
-    val httpServer = this!!.createHttpServer()!!
-    httpServer.config()
-    return httpServer
-}

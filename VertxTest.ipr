@@ -209,7 +209,9 @@
         <root url="file://$PROJECT_DIR$/../vert.x-1.1.0.final/lib/jars" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/../Dev.Git/vert.x/vertx-core/src/main/java" />
+      </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/../vert.x-1.1.0.final/lib/jars" recursive="false" />
     </library>
   </component>

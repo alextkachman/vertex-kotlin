@@ -6,7 +6,6 @@ import org.vertx.java.deploy.Verticle
 import org.vertx.java.core.http.HttpServerRequest
 
 public class ServerExample() : Verticle() {
-
     public override fun start() {
         val BUFF_SIZE = 32 * 1024
         vertx.createHttpServer{
