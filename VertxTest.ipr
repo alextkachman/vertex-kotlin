@@ -191,10 +191,10 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="EchoServer" type="JetRunConfigurationType" factoryName="Kotlin">
+    <configuration default="false" name="EchoClient" type="JetRunConfigurationType" factoryName="Kotlin">
       <option name="MAIN_CLASS_NAME" value="org.vertx.java.deploy.impl.cli.Starter" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.echo.EchoServer -instances 10 -cp $PROJECT_DIR$/out/production/VertxTest" />
+      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.echo.EchoSslClient -cp $PROJECT_DIR$/out/production/VertxTest" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -211,17 +211,23 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="EchoClient" type="JetRunConfigurationType" factoryName="Kotlin">
+    <configuration default="false" name="EchoServer" type="JetRunConfigurationType" factoryName="Kotlin">
       <option name="MAIN_CLASS_NAME" value="org.vertx.java.deploy.impl.cli.Starter" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.echo.EchoClient -cp $PROJECT_DIR$/out/production/VertxTest" />
+      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.echo.EchoSslServer -instances 10 -cp $PROJECT_DIR$/out/production/VertxTest" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="vertx" />
       <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -232,25 +238,23 @@
   <component name="libraryTable">
     <library name="KotlinRuntime">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/../Dev.Git/jet/dist/kotlin-runtime.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../jet/dist/kotlin-runtime.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/../Dev.Git/jet/dist/kotlin-runtime.jar!/src" />
+        <root url="jar://$PROJECT_DIR$/../jet/dist/kotlin-runtime.jar!/src" />
       </SOURCES>
     </library>
     <library name="vertx">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/../vert.x-1.1.0.final/lib/jars" />
-        <root url="file://$PROJECT_DIR$/../vert.x-1.1.0.final/lib/jars" />
+        <root url="file://$PROJECT_DIR$/../../vert.x-1.1.0.final/lib/jars" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="file://$PROJECT_DIR$/../Dev.Git/vert.x/vertx-core/src/main/java" />
-        <root url="file://$PROJECT_DIR$/../Dev.Git/vert.x/vertx-boot/src/main/java" />
-        <root url="file://$PROJECT_DIR$/../Dev.Git/vert.x/vertx-platform/src/main/java" />
+        <root url="file://$PROJECT_DIR$/../vert.x/vertx-platform/src/main/java" />
+        <root url="file://$PROJECT_DIR$/../vert.x/vertx-core/src/main/java" />
       </SOURCES>
-      <jarDirectory url="file://$PROJECT_DIR$/../vert.x-1.1.0.final/lib/jars" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/../../vert.x-1.1.0.final/lib/jars" recursive="false" />
     </library>
   </component>
 </project>

@@ -6,9 +6,12 @@ import org.vertx.java.core.streams.Pump
 import org.vertx.kotlin.core.*
 import org.vertx.java.core.buffer.Buffer
 
-public class EchoClient() : Verticle() {
+public class EchoSslClient() : Verticle() {
     public override fun start() {
         vertx.createNetClient {
+            setSSL(true)
+            setTrustAll(true)
+
             connect(1234){ socket ->
                 socket.dataHandler{ buffer ->
                     System.out.println("Net client receiving:\n-------\n$buffer\n-------")

@@ -5,9 +5,13 @@ import org.vertx.java.core.streams.Pump
 
 import org.vertx.kotlin.core.*
 
-public class EchoServer() : Verticle() {
+public class EchoSslServer() : Verticle() {
     public override fun start() {
         vertx.createNetServer {
+            setSSL(true)
+            setKeyStorePath("./server-keystore.jks")
+            setKeyStorePassword("wibble")
+
             connectHandler{ socket ->
                 Pump.createPump(socket, socket)!!.start();
             }
