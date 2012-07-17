@@ -23,7 +23,7 @@ public class ProxyServer() : Verticle() {
                     req.setChunked(true);
 
                     resp.dataHandler { data ->
-                        System.out.println("Proxying response body:" + data)
+                        println("Proxying response body:" + data)
                         req.write(data)
                     }
                     resp.endHandler {
@@ -33,7 +33,7 @@ public class ProxyServer() : Verticle() {
 
                 forwardReq.headers()!!.putAll(req.headers())
                 req.dataHandler { data ->
-                    System.out.println("Proxying response body:" + data)
+                    println("Proxying response body:" + data)
                     forwardReq.write(data)
                 }
                 req.endHandler {
