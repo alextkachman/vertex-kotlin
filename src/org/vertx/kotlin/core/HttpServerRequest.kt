@@ -23,8 +23,8 @@ public fun HttpServerRequest.setChunked(b: Boolean) : Unit {
 public val HttpServerRequest.requestParams : Map<String?,String?>
     get() = params()!!
 
-public val HttpServerRequest.responseHeaders : Map<String,Any?>
-    get() = response!!.headers() as Map<String,Any?>
+public val HttpServerRequest.responseHeaders : Map<String?,Any?>
+    get() = response!!.headers()!!
 
 public val HttpServerRequest.requestHeaders : Map<String?,String?>
     get() = headers()!!
