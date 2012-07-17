@@ -22,7 +22,7 @@ import org.vertx.kotlin.core.*
 
 public class EchoSslServer() : Verticle() {
     public override fun start() {
-        vertx.createNetServer {
+        createNetServer {
             setSSL(true)
             setKeyStorePath("./server-keystore.jks")
             setKeyStorePassword("wibble")

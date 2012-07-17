@@ -21,12 +21,12 @@ import org.vertx.kotlin.core.*
 
 public class ProxyServer() : Verticle() {
     public override fun start() {
-        val client = vertx.createHttpClient {
-            setHost("localhost")
-            setPort(8282)
+        val client = createHttpClient {
+            setHost("www.microsoft.com")
+            setPort(80)
         }
 
-        vertx.createHttpServer {
+        createHttpServer {
             requestHandler {
                 val req = this
 

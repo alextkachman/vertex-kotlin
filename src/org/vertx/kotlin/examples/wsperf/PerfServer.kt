@@ -13,32 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vertx.kotlin.examples.echo
+package org.vertx.kotlin.examples.wsperf
 
 import org.vertx.java.deploy.Verticle
 import org.vertx.java.core.streams.Pump
+import org.vertx.java.core.http.ServerWebSocket
 
 import org.vertx.kotlin.core.*
-import org.vertx.java.core.buffer.Buffer
 
-public class EchoSslClient() : Verticle() {
+public class PerfServer() : Verticle() {
     public override fun start() {
-        createNetClient {
-            setSSL(true)
-            setTrustAll(true)
+        createHttpServer{
+            val BUFF_SIZE = 32*1024
+            setReceiveBufferSize(BUFF_SIZE)
+            setSendBufferSize(BUFF_SIZE)
+            setAcceptBacklog(32000)
 
-            connect(1234){ socket ->
-                socket.dataHandler{ buffer ->
-                    System.out.println("Net client receiving:\n-------\n$buffer\n-------")
-                }
-
-                //Now send some data
-                for (var i in 0..9) {
-                    val str = "hello$i\n"
-                    System.out.print("Net client sending: $str")
-                    socket.write(str)
-                }
+            websocketHandler { ws ->
+                //System.out.println("connected " + ++count);
+                Pump.createPump(ws, ws, BUFF_SIZE)!!.start();
             }
-        }
+        }.listen(8080, "localhost");
     }
 }
