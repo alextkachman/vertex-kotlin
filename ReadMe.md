@@ -4,6 +4,14 @@ This module provides a [kotlin](http://jetbrains.github.com/kotlin/) DSL to [ver
 
 See the [introduction](http://jetbrains.github.com/kotlin/) to see how to use it.
 
+### Run a sample kotlin vertx application
+
+The following command should run a sample server (assuming you have [maven 3.x](http://maven.apache.org/) installed)
+
+    mvn test-compile exec:java
+
+You can now open http://localhost:8080/ and have fun :)
+
 ### Browse the API docs
 
 Build the API docs locally via

@@ -15,7 +15,7 @@
  */
 package org.vertx.kotlin.core
 
-import org.vertx.java.core.Handler;
+import org.vertx.java.core.Handler
 
 public fun <T> handler(handlerFun: (T)->Any?) : Handler<T?>  = object: Handler<T?> {
     public override fun handle(arg: T?) {

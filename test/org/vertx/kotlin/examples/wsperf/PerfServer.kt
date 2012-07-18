@@ -33,9 +33,9 @@ public class PerfServer() : Verticle() {
             acceptBacklog = 32000
 
             websocketHandler { ws ->
-                //System.out.println("connected " + ++count);
-                Pump.createPump(ws, ws, BUFF_SIZE)!!.start();
+                //System.out.println("connected " + ++count)
+                Pump.createPump(ws, ws, BUFF_SIZE)!!.start()
             }
-        }.listen(8080, "localhost");
+        }.listen(8080, "localhost")
     }
 }
