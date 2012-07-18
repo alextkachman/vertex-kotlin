@@ -28,9 +28,9 @@ public class EchoSslServer() : Verticle() {
             setKeyStorePassword("wibble")
 
             connectHandler{ socket ->
-                Pump.createPump(socket, socket)!!.start();
+                Pump.createPump(socket, socket)!!.start()
             }
         }
-        .listen(1234);
+        .listen(1234)
     }
 }

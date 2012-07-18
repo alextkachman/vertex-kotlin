@@ -92,13 +92,13 @@ public fun HttpServerRequest.write(s: String, voidHandler: ()-> Unit) : HttpServ
     return this
 }
 
-public fun HttpServerRequest.end(s: String) : Unit = response!!.end(s);
+public fun HttpServerRequest.end(s: String) : Unit = response!!.end(s)
 
-public fun HttpServerRequest.end(s: String, s1: String) : Unit = response!!.end(s, s1);
+public fun HttpServerRequest.end(s: String, s1: String) : Unit = response!!.end(s, s1)
 
-public fun HttpServerRequest.end(buffer: Buffer) : Unit = response!!.end(buffer);
+public fun HttpServerRequest.end(buffer: Buffer) : Unit = response!!.end(buffer)
 
-public fun HttpServerRequest.end(): Unit = response!!.end();
+public fun HttpServerRequest.end(): Unit = response!!.end()
 
 public fun HttpServerRequest. sendFile(file: String) : HttpServerRequest {
     response!!.sendFile(file)

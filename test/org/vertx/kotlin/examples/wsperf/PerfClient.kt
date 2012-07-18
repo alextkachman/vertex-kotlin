@@ -25,26 +25,19 @@ import java.util.HashSet
 import org.vertx.java.core.buffer.Buffer
 
 public class PerfClient() : Verticle() {
-    val CONNS = 100;
-
+    val CONNS = 100
     val STR_LENGTH = 8 * 1024
-
     val STATS_BATCH = 1024 * 1024
-
     val BUFF_SIZE = 32 * 1024
-
     var statsCount = 0.toLong()
-
     var connectCount = 0
-
     val websockets = LinkedList<WebSocket>()
-
     val wss = HashSet<WebSocket>()
 
     var message = ({
-            val sb = StringBuilder(STR_LENGTH);
+            val sb = StringBuilder(STR_LENGTH)
             for (i in 0..STR_LENGTH) {
-                sb.append('X');
+                sb.append('X')
             }
             sb.toString()!!
         })()
@@ -60,16 +53,16 @@ public class PerfClient() : Verticle() {
             setSendBufferSize(BUFF_SIZE)
             setConnectTimeout(60000)
             setBossThreads(4)
-        }.connect(0);
+        }.connect(0)
     }
 
     fun HttpClient.connect(count: Int) {
         var start = 0.toLong()
         connectWebsocket("/echo/websocket") {
-            setWriteQueueMaxSize(BUFF_SIZE);
+            setWriteQueueMaxSize(BUFF_SIZE)
             dataHandler { data ->
                 if (!wss.contains(this)) {
-                    wss.add(this);
+                    wss.add(this)
                 }
 
                 statsCount += data.length()
@@ -85,9 +78,9 @@ public class PerfClient() : Verticle() {
 
             connectCount++
             if (connectCount == CONNS) {
-                startWebSocket();
+                startWebSocket()
             }
-        };
+        }
 
         if (count + 1 < CONNS) {
             runOnLoop { connect(count + 1) }

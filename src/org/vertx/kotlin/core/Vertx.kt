@@ -46,6 +46,6 @@ public fun Vertx?.createNetClient(config: NetClient.()->Unit) : NetClient {
 }
 
 public fun Vertx?.setPeriodic(l: Long, longHandler: (Long)->Unit) : Long
-        = this!!.setPeriodic(l, handler(longHandler));
+        = this!!.setPeriodic(l, handler(longHandler))
 
 public fun Vertx?.runOnLoop(handler: ()->Any?) : Unit = this!!.runOnLoop(handler(handler))
