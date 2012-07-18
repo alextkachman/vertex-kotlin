@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vertx.kotlin.core
+package org.vertx.kotlin.examples
 
+import org.vertx.kotlin.core.*
 import org.vertx.java.core.Vertx
 import org.vertx.java.core.http.HttpServer
 import org.vertx.java.deploy.Verticle

@@ -26,12 +26,12 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-          <dependency>
+        <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty</artifactId>
             <version>3.4.6.Final</version>
             <scope>compile</scope>
-          </dependency>
+        </dependency>
         <dependency>
             <groupId>org.vert-x</groupId>
             <artifactId>vertx-core</artifactId>
@@ -47,6 +47,13 @@
             <!-- TODO hack until the jars are in a central repo -->
             <systemPath>${basedir}/lib/vert.x-platform-1.1.0.final.jar</systemPath>
             <scope>system</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mozilla</groupId>
+            <artifactId>rhino</artifactId>
+            <version>1.7R4</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -171,6 +178,30 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classpathScope>test</classpathScope>
+                    <mainClass>org.vertx.kotlin.examples.namespace</mainClass>
+                    <!--
+                    <mainClass>org.vertx.java.deploy.impl.cli.Starter</mainClass>
+                    <arguments>
+                        <argument>run</argument>
+                        <argument>org.vertx.kotlin.examples.ServerExample</argument>
+                    </arguments>
+                    -->
+                </configuration>
             </plugin>
         </plugins>
     </build>
