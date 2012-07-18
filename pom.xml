@@ -26,6 +26,12 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+          <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.4.6.Final</version>
+            <scope>compile</scope>
+          </dependency>
         <dependency>
             <groupId>org.vert-x</groupId>
             <artifactId>vertx-core</artifactId>
