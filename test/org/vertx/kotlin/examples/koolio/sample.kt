@@ -22,7 +22,7 @@ fun createKoolioServer(vertx: Vertx): HttpServer {
         routeMatcher {
             var k = 0
             getWithRegEx(".*") {
-                end(createDocument().html {
+                end(html {
                   head {
                       title("Koolio Template Sample")
                   }
