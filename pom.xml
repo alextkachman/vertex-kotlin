@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.vertx</groupId>
+    <artifactId>vertx-kotlin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <prerequisites>
+        <maven>3.0.3</maven>
+    </prerequisites>
+
+    <properties>
+        <junit-version>4.10</junit-version>
+        <kotlin.version>0.1-SNAPSHOT</kotlin.version>
+        <surefire-version>2.12</surefire-version>
+        <exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vert-x</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>1.1.0.final</version>
+            <!-- TODO hack until the jars are in a central repo -->
+            <systemPath>${basedir}/lib/vert.x-core-1.1.0.final.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.vert-x</groupId>
+            <artifactId>vertx-platform</artifactId>
+            <version>1.1.0.final</version>
+            <!-- TODO hack until the jars are in a central repo -->
+            <systemPath>${basedir}/lib/vert.x-platform-1.1.0.final.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>jetbrains-release</id>
+            <name>jetbrains-release</name>
+            <url>http://repository.jetbrains.com/releases</url>
+        </repository>
+        <repository>
+            <snapshots/>
+            <id>jetbrains-snapshots</id>
+            <name>jetbrains-snapshots</name>
+            <url>http://repository.jetbrains.com/snapshots</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>jetbrains-repo</id>
+            <name>jetbrains-repo</name>
+            <url>http://repository.jetbrains.com/repo</url>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots/>
+            <id>jetbrains-repo-snapshots</id>
+            <name>jetbrains-repo-snapshots</name>
+            <url>http://repository.jetbrains.com/repo</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+
+
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-version}</version>
+                <configuration>
+                    <forkMode>once</forkMode>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <useManifestOnlyJar>false</useManifestOnlyJar>
+                    <failIfNoTests>false</failIfNoTests>
+                    <includes>
+                        <include>**/*Test.*</include>
+                    </includes>
+                    <excludes>
+                    </excludes>
+                    <systemProperties>
+                        <project.version>${project.version}</project.version>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kdoc-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <configuration>
+                    <sources>
+                        <source>${basedir}/src</source>
+                    </sources>
+                    <title>kotlin vert.x API</title>
+                    <ignorePackages>
+                        <ignorePackage>com</ignorePackage>
+                        <ignorePackage>sun</ignorePackage>
+                        <ignorePackage>java</ignorePackage>
+                        <ignorePackage>jet</ignorePackage>
+                        <ignorePackage>org.vertx.java</ignorePackage>
+                    </ignorePackages>
+                    <sourceRootHref>https://github.com/alextkachman/vertex-kotlin/tree/master</sourceRootHref>
+                    <projectRootDir>${basedir}</projectRootDir>
+                    <packageDescriptionFiles>
+                        <org.vertx.kotlin.core>${basedir}/src/ReadMe.md</org.vertx.kotlin.core>
+                    </packageDescriptionFiles>
+                    <packageSummaryText>
+                        <org.vertx.kotlin.core>kotlin DSL for vert.x</org.vertx.kotlin.core>
+                    </packageSummaryText>
+                    <packagePrefixToUrls>
+                        <kotlin>http://jetbrains.github.com/kotlin/versions/snapshot/apidocs/</kotlin>
+                        <org.vertx>http://vertx.io/api/java/api/</org.vertx>
+                        <io.kool>http://kool.io/versions/snapshot/apidocs/</io.kool>
+                    </packagePrefixToUrls>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>apidoc</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>apidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

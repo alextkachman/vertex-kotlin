@@ -41,7 +41,7 @@ public class PerfClient() : Verticle() {
 
     val wss = HashSet<WebSocket>()
 
-    var message = ({
+    var message: String? = ({
             val sb = StringBuilder(STR_LENGTH);
             for (i in 0..STR_LENGTH) {
                 sb.append('X');
@@ -103,7 +103,10 @@ public class PerfClient() : Verticle() {
 
     fun WebSocket.writeWebSocket() {
         if (!writeQueueFull()) {
+/*
+            TODO compile error - FIX ASAP!!!
             writeBinaryFrame(Buffer(message))
+*/
             runOnLoop { writeWebSocket() }
         } else {
             // Flow control

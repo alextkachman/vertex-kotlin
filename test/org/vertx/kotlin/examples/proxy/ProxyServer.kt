@@ -34,7 +34,10 @@ public class ProxyServer() : Verticle() {
                 val forwardReq = client.request(method!!, uri!!) { resp ->
                     println("Proxying response: ${resp.statusCode}");
                     req.statusCode = resp.statusCode
+/*
+                    TODO compile error - FIX ASAP!!!
                     req.responseHeaders.putAll(resp.headers());
+*/
                     req.setChunked(true);
 
                     resp.dataHandler { data ->
@@ -46,7 +49,10 @@ public class ProxyServer() : Verticle() {
                     }
                 }
 
+/*
+                TODO compile error - FIX ASAP!!!
                 forwardReq.headers()!!.putAll(req.headers())
+*/
                 req.dataHandler { data ->
                     println("Proxying response body:" + data)
                     forwardReq.write(data)
