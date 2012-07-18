@@ -297,6 +297,26 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="FreeMarkerServer" type="JetRunConfigurationType" factoryName="Kotlin">
+      <option name="MAIN_CLASS_NAME" value="org.vertx.java.deploy.impl.cli.Starter" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.freemarker.FreeMarkerServer -instances 10 -cp $PROJECT_DIR$/out/production/VertxTest" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="vertx" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
@@ -309,6 +329,16 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/../jet/dist/kotlin-runtime.jar!/src" />
+      </SOURCES>
+    </library>
+    <library name="org.freemarker:freemarker:2.3.19" type="repository">
+      <properties maven-id="org.freemarker:freemarker:2.3.19" />
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/freemarker-2.3.19.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/freemarker-2.3.19-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="vertx">
