@@ -36,7 +36,6 @@ public class JsonWrapper() : DefaultObjectWrapper() {
         })
 }
 
-
 fun HttpServerRequest.end(template: Template, model: Any?) {
     val writer = StringWriter()
     template.process(model, writer)

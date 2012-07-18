@@ -20,6 +20,7 @@ import org.vertx.java.core.http.HttpServer
 import org.vertx.java.core.http.HttpClient
 import org.vertx.java.core.net.NetServer
 import org.vertx.java.core.net.NetClient
+import org.vertx.java.core.shareddata.SharedData
 
 public fun Vertx?.createHttpServer(config: HttpServer.()->Unit) : HttpServer {
     val httpServer = this!!.createHttpServer()!!
@@ -49,3 +50,6 @@ public fun Vertx?.setPeriodic(l: Long, longHandler: (Long)->Unit) : Long
         = this!!.setPeriodic(l, handler(longHandler))
 
 public fun Vertx?.runOnLoop(handler: ()->Any?) : Unit = this!!.runOnLoop(handler(handler))
+
+public val Vertx.sharedData : SharedData
+    get() = sharedData()!!

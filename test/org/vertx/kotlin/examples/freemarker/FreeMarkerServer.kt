@@ -38,12 +38,13 @@ public class FreeMarkerServer() : Verticle() {
     }
 
     public override fun start() {
-        val fmConfig = Configuration()
-        fmConfig.setObjectWrapper(JsonWrapper())
+        val fmConfig = freemarkerConfig { first ->
+            if (first) {
+                setDirectoryForTemplateLoading(File("./test/org/vertx/kotlin/examples/freemarker"))
+            }
+        }
 
-        val template = fmConfig.getTemplate("/test/org/vertx/kotlin/examples/freemarker/index.ftl")!!
-
-        createHttpServer{
+        createHttpServer {
             routeMatcher {
                 noMatch {
                     val model = JsonObject().
@@ -51,6 +52,8 @@ public class FreeMarkerServer() : Verticle() {
                             putString("message", "Hello, World!")!!.
                             putArray("list", JsonArray().addString("item 1")!!.addString("item 2")!!.addString("item 3"))
 
+                    // we do it here to make reloading work
+                    val template = fmConfig.getTemplate("index.ftl")!!
                     end(template, model)
                 }
             }
