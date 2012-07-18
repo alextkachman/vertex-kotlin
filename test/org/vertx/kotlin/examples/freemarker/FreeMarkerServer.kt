@@ -24,14 +24,13 @@ import java.io.File
 import java.util.HashMap
 import java.util.Date
 import java.io.StringWriter
-import org.vertx.groovy.core.http.HttpServerRequest
+import org.vertx.java.core.http.HttpServerRequest
 import org.vertx.java.core.json.JsonObject
 import freemarker.template.DefaultObjectWrapper
 import freemarker.template.TemplateModel
 import org.vertx.java.core.json.JsonArray
-import freemarker.template.TemplateHashModel
-import freemarker.template.TemplateScalarModel
-import freemarker.template.TemplateSequenceModel
+
+import org.vertx.kotlin.freemarker.*
 
 public class FreeMarkerServer() : Verticle() {
     class object {
@@ -42,6 +41,8 @@ public class FreeMarkerServer() : Verticle() {
         val fmConfig = Configuration()
         fmConfig.setObjectWrapper(JsonWrapper())
 
+        val template = fmConfig.getTemplate("/test/org/vertx/kotlin/examples/freemarker/index.ftl")!!
+
         createHttpServer{
             routeMatcher {
                 noMatch {
@@ -50,22 +51,9 @@ public class FreeMarkerServer() : Verticle() {
                             putString("message", "Hello, World!")!!.
                             putArray("list", JsonArray().addString("item 1")!!.addString("item 2")!!.addString("item 3"))
 
-                    val writer = StringWriter()
-                    fmConfig.getTemplate("/test/org/vertx/kotlin/examples/freemarker/index.ftl")!!.process(model, writer)
-                    end(writer.toString() as String)
+                    end(template, model)
                 }
             }
         }.listen(8080, "localhost")
-    }
-}
-
-class JsonWrapper() : DefaultObjectWrapper(){
-    public override fun wrap(obj: Any?): TemplateModel? {
-        return super<DefaultObjectWrapper>.wrap(when (obj) {
-            is JsonObject -> (obj as JsonObject).toMap()
-
-            is JsonArray -> (obj as JsonArray).toList()
-            else -> obj
-        })
     }
 }
