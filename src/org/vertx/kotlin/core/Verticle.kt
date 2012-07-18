@@ -7,6 +7,7 @@ import org.vertx.java.core.http.HttpClient
 import org.vertx.java.core.net.NetServer
 import org.vertx.java.core.net.NetClient
 import org.vertx.java.core.eventbus.EventBus
+import org.vertx.java.core.logging.Logger
 
 public fun Verticle.createHttpServer(config: HttpServer.()->Unit) : HttpServer = getVertx().createHttpServer(config)
 
@@ -22,3 +23,6 @@ public val Verticle.eventBus: EventBus
     get() = getVertx()!!.eventBus()!!
 
 public fun Verticle.runOnLoop(handler: ()->Any?) : Unit = getVertx().runOnLoop(handler);
+
+public val Verticle.logger: Logger
+    get() = getContainer()!!.getLogger()!!
