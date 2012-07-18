@@ -79,6 +79,12 @@
             <name>jetbrains-snapshots</name>
             <url>http://repository.jetbrains.com/snapshots</url>
         </repository>
+        <repository>
+            <snapshots/>
+              <id>fusesource-nexus-snapshots</id>
+              <name>FuseSource Nexus Snapshots</name>
+              <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
