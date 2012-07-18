@@ -50,6 +50,15 @@
             <scope>system</scope>
         </dependency>
 
+        <!-- TODO we could maybe move the freemarker stuff to a separate library? -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.19</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- testing -->
         <dependency>
             <groupId>org.mozilla</groupId>
             <artifactId>rhino</artifactId>
