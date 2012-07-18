@@ -22,12 +22,15 @@ import org.vertx.java.core.http.ServerWebSocket
 import org.vertx.kotlin.core.*
 
 public class PerfServer() : Verticle() {
+    class object {
+        val BUFF_SIZE = 32*1024
+    }
+
     public override fun start() {
         createHttpServer{
-            val BUFF_SIZE = 32*1024
-            setReceiveBufferSize(BUFF_SIZE)
-            setSendBufferSize(BUFF_SIZE)
-            setAcceptBacklog(32000)
+            receiveBufferSize = BUFF_SIZE
+            sendBufferSize = BUFF_SIZE
+            acceptBacklog = 32000
 
             websocketHandler { ws ->
                 //System.out.println("connected " + ++count);
