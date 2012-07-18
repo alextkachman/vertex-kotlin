@@ -15,6 +15,7 @@
 
     <properties>
         <junit-version>4.10</junit-version>
+        <koolio.version>1.0-SNAPSHOT</koolio.version>
         <kotlin.version>0.1-SNAPSHOT</kotlin.version>
         <surefire-version>2.12</surefire-version>
         <exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
@@ -53,6 +54,12 @@
             <groupId>org.mozilla</groupId>
             <artifactId>rhino</artifactId>
             <version>1.7R4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.kool</groupId>
+            <artifactId>kool-template</artifactId>
+            <version>${koolio.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -194,13 +201,10 @@
                 <configuration>
                     <classpathScope>test</classpathScope>
                     <mainClass>org.vertx.kotlin.examples.namespace</mainClass>
-                    <!--
-                    <mainClass>org.vertx.java.deploy.impl.cli.Starter</mainClass>
                     <arguments>
-                        <argument>run</argument>
-                        <argument>org.vertx.kotlin.examples.ServerExample</argument>
+                        <!-- which sub-example should we start by default, if any -->
+                        <argument>koolio</argument>
                     </arguments>
-                    -->
                 </configuration>
             </plugin>
         </plugins>
