@@ -17,7 +17,6 @@ package org.vertx.kotlin.examples.freemarker
 
 import org.vertx.java.core.streams.Pump
 import org.vertx.java.deploy.Verticle
-import org.vertx.kotlin.core.*
 import freemarker.template.Configuration
 import freemarker.cache.FileTemplateLoader
 import java.io.File
@@ -30,7 +29,49 @@ import freemarker.template.DefaultObjectWrapper
 import freemarker.template.TemplateModel
 import org.vertx.java.core.json.JsonArray
 
+import org.vertx.kotlin.core.*
 import org.vertx.kotlin.freemarker.*
+import org.vertx.java.core.eventbus.Message
+import org.vertx.java.core.Handler
+
+public class ApplicationVerticle() : Verticle() {
+    public override fun start() {
+        deployVerticle(
+            javaClass<FreeMarkerVerticle>(),
+            JsonObject().
+                putString("name","myFreemarker")!!.
+                putString("directoryForTemplateLoading","./test/org/vertx/kotlin/examples/freemarker")!!
+        )
+
+        deployVerticle(
+            javaClass<FreeMarkerServer>(),
+            JsonObject(),
+            10
+        )
+    }
+}
+
+public class FreeMarkerVerticle() : Verticle() {
+    public override fun start() {
+        val config = this.config
+
+        val freeMarkerConfig = Configuration()
+        freeMarkerConfig.setObjectWrapper(JsonWrapper())
+
+        val dir = config.getString("directoryForTemplateLoading")
+        if(dir != null) {
+            freeMarkerConfig.setDirectoryForTemplateLoading(File(dir))
+        }
+
+        val name = config.getString("name")
+
+        eventBus.registerLocalHandler<JsonObject>("freemarker.service.$name") {
+            val writer = StringWriter()
+            freeMarkerConfig.getTemplate(body!!.getString("template")!!)!!.process(body!!.getObject("model")!!, writer)
+            reply(JsonObject().putString("rendered", writer.toString()))
+        }
+    }
+}
 
 public class FreeMarkerServer() : Verticle() {
     class object {
@@ -38,12 +79,6 @@ public class FreeMarkerServer() : Verticle() {
     }
 
     public override fun start() {
-        val fmConfig = freemarkerConfig { first ->
-            if (first) {
-                setDirectoryForTemplateLoading(File("./test/org/vertx/kotlin/examples/freemarker"))
-            }
-        }
-
         createHttpServer {
             routeMatcher {
                 noMatch {
@@ -52,9 +87,14 @@ public class FreeMarkerServer() : Verticle() {
                             putString("message", "Hello, World!")!!.
                             putArray("list", JsonArray().addString("item 1")!!.addString("item 2")!!.addString("item 3"))
 
-                    // we do it here to make reloading work
-                    val template = fmConfig.getTemplate("index.ftl")!!
-                    end(template, model)
+                    eventBus.send("freemarker.service.myFreemarker",
+                        JsonObject().
+                                putString("template","index.ftl")!!.
+                                putObject("model", model),
+                        handler<Message<JsonObject?>>{ reply ->
+                            end(reply.body!!.getString("rendered") as String)
+                        }
+                    )
                 }
             }
         }.listen(8080, "localhost")

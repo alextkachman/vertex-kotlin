@@ -8,6 +8,7 @@ import org.vertx.java.core.net.NetServer
 import org.vertx.java.core.net.NetClient
 import org.vertx.java.core.eventbus.EventBus
 import org.vertx.java.core.logging.Logger
+import org.vertx.java.core.json.JsonObject
 
 public fun Verticle.createHttpServer(config: HttpServer.()->Unit) : HttpServer = getVertx().createHttpServer(config)
 
@@ -26,3 +27,17 @@ public fun Verticle.runOnLoop(handler: ()->Any?) : Unit = getVertx().runOnLoop(h
 
 public val Verticle.logger: Logger
     get() = getContainer()!!.getLogger()!!
+
+public val Verticle.config: JsonObject
+    get() {
+        val config = getContainer()!!.getConfig()
+        return if(config == null) JsonObject() else config
+    }
+
+public fun Verticle.deployVerticle(main: String, config: JsonObject = JsonObject(), instances: Int = 1, doneHandler: (()->Any?)? = null) {
+    getContainer()!!.deployVerticle(main, config, instances, if(doneHandler!=null) handler(doneHandler) else null)
+}
+
+public fun Verticle.deployVerticle(main: java.lang.Class<*>, config: JsonObject = JsonObject(), instances: Int = 1, doneHandler: (()->Any?)? = null) {
+    getContainer()!!.deployVerticle(main.getName(), config, instances, if(doneHandler!=null) handler(doneHandler) else null)
+}
