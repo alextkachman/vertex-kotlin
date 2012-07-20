@@ -300,7 +300,7 @@
     <configuration default="false" name="FreeMarkerServer" type="JetRunConfigurationType" factoryName="Kotlin">
       <option name="MAIN_CLASS_NAME" value="org.vertx.java.deploy.impl.cli.Starter" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.freemarker.ApplicationVerticle -cp $PROJECT_DIR$/out/production/VertxTest:$PROJECT_DIR$/lib/freemarker-2.3.19.jar" />
+      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.freemarker.ApplicationVerticle -conf $PROJECT_DIR$/test/org/vertx/kotlin/examples/freemarker/config.json -cp $PROJECT_DIR$/out/production/VertxTest:$PROJECT_DIR$/lib/freemarker-2.3.19.jar" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />

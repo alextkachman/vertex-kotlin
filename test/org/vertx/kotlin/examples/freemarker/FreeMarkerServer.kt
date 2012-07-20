@@ -34,66 +34,30 @@ import org.vertx.kotlin.freemarker.*
 import org.vertx.java.core.eventbus.Message
 import org.vertx.java.core.Handler
 
-public class ApplicationVerticle() : Verticle() {
-    public override fun start() {
-        deployVerticle(
-            javaClass<FreeMarkerVerticle>(),
-            JsonObject().
-                putString("name","myFreemarker")!!.
-                putString("directoryForTemplateLoading","./test/org/vertx/kotlin/examples/freemarker")!!
-        )
-
-        deployVerticle(
-            javaClass<FreeMarkerServer>(),
-            JsonObject(),
-            10
-        )
-    }
-}
-
-public class FreeMarkerVerticle() : Verticle() {
-    public override fun start() {
-        val config = this.config
-
-        val freeMarkerConfig = Configuration()
-        freeMarkerConfig.setObjectWrapper(JsonWrapper())
-
-        val dir = config.getString("directoryForTemplateLoading")
-        if(dir != null) {
-            freeMarkerConfig.setDirectoryForTemplateLoading(File(dir))
-        }
-
-        val name = config.getString("name")
-
-        eventBus.registerLocalHandler<JsonObject>("freemarker.service.$name") {
-            val writer = StringWriter()
-            freeMarkerConfig.getTemplate(body!!.getString("template")!!)!!.process(body!!.getObject("model")!!, writer)
-            reply(JsonObject().putString("rendered", writer.toString()))
-        }
-    }
-}
+public class ApplicationVerticle() : Verticle(), ConfigurableVerticle {}
 
 public class FreeMarkerServer() : Verticle() {
     class object {
         val BUFF_SIZE = 32*1024
     }
-
     public override fun start() {
         createHttpServer {
             routeMatcher {
                 noMatch {
                     val model = JsonObject().
-                            putString("now", Date().toString())!!.
-                            putString("message", "Hello, World!")!!.
-                            putArray("list", JsonArray().addString("item 1")!!.addString("item 2")!!.addString("item 3"))
+                    putString("now", Date().toString())!!.
+                    putString("message", "Hello, World!")!!.
+                    putArray("list", JsonArray().addString("item 1")!!.addString("item 2")!!.addString("item 3"))
 
-                    eventBus.send("freemarker.service.myFreemarker",
-                        JsonObject().
-                                putString("template","index.ftl")!!.
-                                putObject("model", model),
-                        handler<Message<JsonObject?>>{ reply ->
-                            end(reply.body!!.getString("rendered") as String)
-                        }
+                    val messageHandler : Handler<Message<JsonObject?>?> =
+                            handler<Message<JsonObject?>>{ reply ->
+                                end(reply.body!!.getString("rendered") as String)
+                            }
+
+                    eventBus.send(
+                            "freemarker.service.myFreemarker",
+                            JsonObject().putString("template","index.ftl")!!.putObject("model", model),
+                            messageHandler
                     )
                 }
             }

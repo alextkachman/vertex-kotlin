@@ -1,0 +1,16 @@
+{
+    "verticle_main": "org.vertx.kotlin.examples.freemarker.ApplicationVerticle",
+
+    "nested_verticles": [
+        {
+            "verticle_main": "org.vertx.kotlin.freemarker.FreeMarkerVerticle",
+            "name": "myFreemarker",
+            "directoryForTemplateLoading": "./test/org/vertx/kotlin/examples/freemarker"
+        },
+
+        {
+            "verticle_main": "org.vertx.kotlin.examples.freemarker.FreeMarkerServer",
+            "verticle_instances": 10
+        }
+    ]
+}
