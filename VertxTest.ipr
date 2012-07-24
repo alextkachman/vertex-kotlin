@@ -42,6 +42,9 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="GradleSettings">
+    <option name="gradleHome" value="$PROJECT_DIR$/../../gradle-1.0" />
+  </component>
   <component name="IdProvider" IDEtalkID="B80211FAD068C7B55641ED0780369ACD" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -185,11 +188,6 @@
       </item>
     </group>
   </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state />
-    </entry>
-  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VertxTest.iml" filepath="$PROJECT_DIR$/VertxTest.iml" />
@@ -243,10 +241,10 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="ProxyServer" type="JetRunConfigurationType" factoryName="Kotlin">
+    <configuration default="false" name="FreeMarkerServer" type="JetRunConfigurationType" factoryName="Kotlin">
       <option name="MAIN_CLASS_NAME" value="org.vertx.java.deploy.impl.cli.Starter" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.proxy.ProxyServer -instances 10 -cp $PROJECT_DIR$/out/production/VertxTest" />
+      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.freemarker.ApplicationVerticle -conf $PROJECT_DIR$/test/org/vertx/kotlin/examples/freemarker/config.json -cp $PROJECT_DIR$/out/production/VertxTest:$PROJECT_DIR$/lib/freemarker-2.3.19.jar" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -297,10 +295,10 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="FreeMarkerServer" type="JetRunConfigurationType" factoryName="Kotlin">
+    <configuration default="false" name="ProxyServer" type="JetRunConfigurationType" factoryName="Kotlin">
       <option name="MAIN_CLASS_NAME" value="org.vertx.java.deploy.impl.cli.Starter" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.freemarker.ApplicationVerticle -conf $PROJECT_DIR$/test/org/vertx/kotlin/examples/freemarker/config.json -cp $PROJECT_DIR$/out/production/VertxTest:$PROJECT_DIR$/lib/freemarker-2.3.19.jar" />
+      <option name="PROGRAM_PARAMETERS" value="run org.vertx.kotlin.examples.proxy.ProxyServer -instances 10 -cp $PROJECT_DIR$/out/production/VertxTest" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -324,11 +322,12 @@
   <component name="libraryTable">
     <library name="KotlinRuntime">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/../jet/dist/kotlin-runtime.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../jet/out/artifacts/Kotlin/kotlinc/lib/kotlin-compiler.jar!/" />
+        <root url="jar://$PROJECT_DIR$/../jet/out/artifacts/Kotlin/kotlinc/lib/kotlin-runtime.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/../jet/dist/kotlin-runtime.jar!/src" />
+        <root url="jar://$PROJECT_DIR$/../jet/out/artifacts/Kotlin/kotlinc/lib/kotlin-runtime.jar!/src" />
       </SOURCES>
     </library>
     <library name="org.freemarker:freemarker:2.3.19" type="repository">
@@ -343,14 +342,16 @@
     </library>
     <library name="vertx">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/../../vert.x-1.1.0.final/lib/jars" />
+        <root url="file://$PROJECT_DIR$/lib" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
         <root url="file://$PROJECT_DIR$/../vert.x/vertx-platform/src/main/java" />
         <root url="file://$PROJECT_DIR$/../vert.x/vertx-core/src/main/java" />
+        <root url="file://$PROJECT_DIR$/lib" />
       </SOURCES>
-      <jarDirectory url="file://$PROJECT_DIR$/../../vert.x-1.1.0.final/lib/jars" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" type="SOURCES" />
     </library>
   </component>
 </project>
